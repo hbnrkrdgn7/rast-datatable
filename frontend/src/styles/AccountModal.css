@@ -1,0 +1,110 @@
+/* Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+/* Modal kutusu */
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 380px;
+  max-width: 90%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  animation: fadeIn 0.3s ease;
+}
+
+/* Başlık */
+.modal h2 {
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Hata mesajı */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* Label */
+.modal label {
+  display: block;
+  margin: 8px 0 4px;
+  font-size: 13px;
+  color: #555;
+  text-align: left;
+}
+
+/* Input */
+.modal input {
+  width: 95%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  outline: none;
+  font-size: 14px;
+  margin-bottom: 10px;
+  transition: border 0.2s ease;
+  text-align: left;
+}
+
+.modal input:focus {
+  border-color: #7b2ff7;
+}
+
+/* Modal butonları */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.modal-buttons button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.modal-buttons button[type="submit"] {
+  background: #7b2ff7;
+  color: white;
+}
+
+.modal-buttons button[type="submit"]:hover {
+  background: #651ed5;
+}
+
+.modal-buttons button[type="button"] {
+  background: #f1f1f5;
+  color: #444;
+}
+
+.modal-buttons button[type="button"]:hover {
+  background: #e1e1ea;
+}
+
+/* Fade-in animasyonu */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

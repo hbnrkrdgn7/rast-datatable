@@ -1,0 +1,105 @@
+/* Navbar ana container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 40px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: "Inter", sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Logo ve yazı container */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+}
+
+.navbar-logo img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.navbar-logo .logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  color: #7b2ff7; 
+}
+.navbar-logo svg {
+  height: 38px;
+  width: auto;
+  display: block;
+  cursor: pointer;
+  color: #7b2ff7;
+  filter: invert(39%) sepia(89%) saturate(6581%) hue-rotate(275deg) brightness(94%) contrast(91%);
+}
+.logo-svg {
+  height: 38px;
+  width: auto;
+  cursor: pointer;
+  fill: #7b2ff7; /* SVG içini mor yapar */
+}
+
+
+/* Menü linkleri */
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: clamp(8px, 5vw, 150px);
+  margin: 0;
+  padding: 0 20px; /* soldan ve sağdan boşluk ekledik */
+  justify-content: center;
+  align-items: center;
+}
+
+
+.navbar-links li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 15px;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navbar-links li a:hover {
+  color: #7b2ff7;
+}
+
+/* Hover alt çizgi efekti */
+.navbar-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #7b2ff7;
+  transition: width 0.3s ease;
+}
+
+.navbar-links li a:hover::after {
+  width: 100%;
+}
+
+/* Sosyal medya ikonları */
+.navbar-icons {
+  display: flex;
+  gap: 18px;
+}
+
+.navbar-icons a {
+  font-size: 20px;
+  color: #7b2ff7;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar-icons a:hover {
+  color: #651ed5;
+  transform: translateY(-2px);
+}

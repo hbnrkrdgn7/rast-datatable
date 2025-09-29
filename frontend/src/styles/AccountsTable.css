@@ -1,0 +1,371 @@
+/* Genel container */
+.accounts-container {
+  background: #f9faff;
+  padding: 20px;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.table-wrapper {
+  flex: 1;              /* Tablonun kalan alanı kaplamasını sağlar */
+  overflow-y: auto;     /* Çok satır olursa scroll çıksın */
+}
+
+/* Search bar */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* input ve filtre butonu arası boşluk */
+}
+
+.search-bar {
+   display: flex;
+  align-items: center;
+  background: #f3f4f8;
+  border-radius: 30px;
+  padding: 6px 12px;
+  width: 300px;
+}
+
+.search-bar input {
+  border: none;
+  outline: none;
+  flex: 1;
+  background: transparent;
+  font-size: 14px;
+  padding: 6px;
+}
+
+.search-bar button {
+  background: #7b2ff7;
+  border: none;
+  color: white;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.search-bar button:hover {
+  background: #651ed5;
+}
+
+/* Yeni Hesap Ekle butonu */
+.add-btn {
+  background: linear-gradient(90deg, #7b2ff7, #f107a3);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 20px;
+  transition: 0.2s ease;
+}
+
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(123, 47, 247, 0.3);
+}
+
+/* Tablo */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  table-layout: fixed; 
+}
+
+thead {
+  background: #f8f9fc;
+  font-weight: 600;
+}
+
+th, td {
+  padding: 14px 18px;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* Sütun genişlikleri sabit */
+th.link-col, td.link-col {
+  width: 40;
+}
+
+th.name-col, td.name-col {
+  width: 20%;
+}
+
+th.desc-col, td.desc-col {
+  width: 40%;
+}
+
+tr:hover td {
+  background: #fafaff;
+}
+
+td a {
+  color: #7b2ff7;
+  text-decoration: none;
+}
+
+td a:hover {
+  text-decoration: underline;
+}
+
+/* Action buttons (edit/delete) */
+.action-btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #2196f3;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #1976d2;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+/* Pagination */
+.pagination {
+  position: sticky;   /* sayfanın scroll edilen kısmına göre sabit */
+  bottom: 0;        
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  font-size: 13px;
+  color: #555;
+  background: #f9faff;
+}
+
+.rows-per-page {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rows-per-page select {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.page-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.page-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background: #f3f0ff;
+  border-color: #7b2ff7;
+  color: #7b2ff7;
+}
+
+.page-btn.active {
+  background: #7b2ff7;
+  border-color: #7b2ff7;
+  color: #fff;
+}
+
+.page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Search ve Add butonu aynı satırda */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+.left-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Search ve filter arası boşluk */
+}
+
+.search-bar {
+  flex: 1;
+  max-width: 320px;
+}
+
+.filter-btn {
+  background: #7b2ff7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.filter-btn:hover {
+  background: #651ed5;
+}
+
+.filter-container {
+  position: relative;
+  display: inline-block;
+  min-width: 120px;
+}
+
+.sort-dropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.sort-dropdown button {
+  display: block;
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sort-dropdown button:hover {
+  background: #f5f5f5;
+}
+
+
+/* --- Sıralama okları ve sütun çizgileri --- */
+th {
+  position: relative;
+  border-right: 1px solid #eee; /* sütun ayırıcı çizgi */
+  cursor: pointer;
+}
+
+th:last-child {
+  border-right: none;
+}
+
+.th-content {
+  display: flex;
+  justify-content: space-between; /* metin solda, ok sağda */
+  align-items: center;
+}
+
+.sort-arrow {
+  font-size: 12px;
+  color: #888;
+  user-select: none;
+}
+
+/* --- Detay Modal --- */
+.detail-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 24px 28px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+/* Kapatma butonu */
+.detail-modal .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s ease;
+}
+.detail-box {
+  background: #f9f9ff;
+  border-radius: 10px;
+  padding: 16px;
+  margin: 12px 0;
+  border: 1px solid #eee;
+}
+
+
+.detail-modal .close-btn:hover {
+  color: #000;
+}
+
+
+.detail-modal h3 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 18px;
+}
+
+.detail-modal p {
+  margin: 6px 0;
+  font-size: 14px;
+  word-wrap: break-word;
+}
+
+.detail-modal .modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
