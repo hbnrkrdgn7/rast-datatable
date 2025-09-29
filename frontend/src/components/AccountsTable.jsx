@@ -6,18 +6,18 @@ import AccountModal from "./AccountModal";
 
 const AccountsTable = () => {
   // State değişkenleri
-  const [accounts, setAccounts] = useState([]); // Hesapları tutar
-  const [loading, setLoading] = useState(true); // Yüklenme durumu
-  const [showModal, setShowModal] = useState(false); // Hesap ekleme/düzenleme modalı
-  const [selectedAccount, setSelectedAccount] = useState(null); // Seçilen hesap
-  const [showDetailModal, setShowDetailModal] = useState(false); // Detay modalı
-  const [search, setSearch] = useState(""); // Arama inputu
-  const [rowsPerPage, setRowsPerPage] = useState(4); // Sayfa başına gösterilecek satır
-  const [currentPage, setCurrentPage] = useState(1); // Aktif sayfa
-  const [sortBy, setSortBy] = useState(null); // Sıralama yapılacak kolon
-  const [order, setOrder] = useState("asc"); // Sıralama yönü
-  const [showSortOptions, setShowSortOptions] = useState(false); // Filtre dropdown'u göster
-
+  const [accounts, setAccounts] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [showModal, setShowModal] = useState(false); 
+  const [selectedAccount, setSelectedAccount] = useState(null); 
+  const [showDetailModal, setShowDetailModal] = useState(false);
+  const [search, setSearch] = useState("");
+  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1); 
+  const [sortBy, setSortBy] = useState(null); 
+  const [order, setOrder] = useState("asc"); 
+  const [showSortOptions, setShowSortOptions] = useState(false); 
+  
   // Component mount edildiğinde hesapları çek
   useEffect(() => { fetchAccounts(); }, []);
 
