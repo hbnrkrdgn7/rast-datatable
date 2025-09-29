@@ -11,6 +11,7 @@ Filtreleme ve sıralama (ASC / DESC)
 Sayfalama (Pagination)
 Detay modal (hesap bilgilerini gösterme)
 Postman ile test edilebilir REST API
+Responsive özelliğine sahip
 
 Teknolojiler
 
