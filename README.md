@@ -1,80 +1,9 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Hesap Yönetim Tablosu Uygulaması
 
 Bu proje, React (frontend) ve Node.js + Express (backend) kullanılarak geliştirilmiş bir hesap yönetim tablosu uygulamasıdır.
-Kullanıcılar yeni hesap ekleyebilir, mevcut hesapları düzenleyebilir, silebilir ve tablo üzerinde arama, filtreleme, sıralama, sayfalama işlemleri yapabilir.
-Ayrıca Postman ile API testleri yapılabilir.
+Kullanıcılar yeni hesap ekleyebilir, mevcut hesapları düzenleyebilir, silebilir ve tablo üzerinde arama, filtreleme, sıralama, sayfalama işlemleri yapabilir. Ayrıca Postman ile API testleri yapılabilir.
 
 Özellikler
-
 Hesap listesi görüntüleme
 Yeni hesap ekleme / düzenleme / silme (CRUD)
 Arama (Search bar)
@@ -82,36 +11,84 @@ Filtreleme ve sıralama (ASC / DESC)
 Sayfalama (Pagination)
 Detay modal (hesap bilgilerini gösterme)
 Postman ile test edilebilir REST API
+Responsive özelliğine sahip
 
 Teknolojiler
 
 Frontend: React, React Hooks, React Icons, CSS
 Backend: Node.js, Express.js, CORS
-Postman (API testleri için)
+Database: SQLite / PostgreSQL / MySQL (istediğin veritabanı)
+API Testleri: Postman
+
+Gerekli Araçlar ve Sürümler
+
+Node.js >= 18.x
+npm >= 9.x
+Veritabanı (SQLite / PostgreSQL / MySQL)
+Git
 
 Kurulum
-
 Backend
 
+Backend dizinine geç:
 cd backend
+
+Gerekli paketleri yükle:
 npm install
+
+.env dosyasını oluştur ve örneğini ekle:
+
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=password
+DB_NAME=accounts_db
+CORS_ORIGIN=http://localhost:3000
+
+
+Not: CORS_ORIGIN frontend’in çalıştığı portu belirtir.
+Veritabanı kurulum / migration / seed adımları:
+Veritabanı oluştur: accounts_db
+Migration veya seed script varsa çalıştır:
+node db/migrate.js
+node db/seed.js
+
+Backend’i başlat:
+
 npm run dev
 Çalıştırma: http://localhost:5000
 
 Frontend
+
+Frontend dizinine geç:
 cd frontend
+
+Gerekli paketleri yükle:
 npm install
+
+Frontend’i başlat:
+
 npm start
 Çalıştırma: http://localhost:3000
 
-API Endpointleri
+Geliştirme ve Prod Build Komutları
+Geliştirme modu:
 
-Metod	Endpoint	        Açıklama
-GET 	/api/accounts	    Tüm hesapları getirir
-GET 	/api/accounts/:id	Tek bir hesabı getirir
-POST	/api/accounts	    Yeni hesap ekler
-PUT  	/api/accounts/:id	Hesap günceller
-DELETE	/api/accounts/:id	Hesap siler
+npm start
+
+Üretim (production) build:
+
+npm run build
+
+Build klasörü frontend/build altında oluşturulur.
+
+Backend API Endpointleri
+Metod  	Endpoint	           Açıklama
+GET 	  /api/accounts	     Tüm hesapları getirir
+GET 	  /api/accounts/:id	 Tek bir hesabı getirir
+POST	  /api/accounts	     Yeni hesap ekler
+PUT	    /api/accounts/:id	 Hesap günceller
+DELETE	/api/accounts/:id	 Hesap siler
 
 Postman Kullanımı
 
@@ -129,7 +106,6 @@ Yeni hesap ekle
 POST http://localhost:5000/api/accounts
 Content-Type: application/json
 
-
 Body:
 
 {
@@ -142,7 +118,6 @@ Hesap güncelle
 PUT http://localhost:5000/api/accounts/1
 Content-Type: application/json
 
-
 Body:
 
 {
@@ -153,3 +128,14 @@ Body:
 
 Hesap sil
 DELETE http://localhost:5000/api/accounts/1
+
+CORS Yapılandırma Notu
+
+Backend’de CORS kullanımı:
+
+const cors = require("cors");
+
+app.use(cors({
+  origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+}));
