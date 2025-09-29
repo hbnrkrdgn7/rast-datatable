@@ -8,8 +8,11 @@ const Navbar = () => {
     <nav className="navbar">
       {/* Logo */}
       <div className="navbar-logo">
-         <Logo className="logo-svg"/>
-      </div>
+  <a href="https://rastmobile.com/" target="_blank" rel="noopener noreferrer">
+    <Logo className="logo-svg"/>
+  </a>
+</div>
+
 
 
       {/* Menü Linkleri */}
@@ -22,10 +25,10 @@ const Navbar = () => {
 
       {/* Sosyal Medya İkonları */}
       <div className="navbar-icons">
-        <a href="https://youtube.com" target="_blank" rel="noreferrer"><FaYoutube /></a>
-        <a href="https://behance.net" target="_blank" rel="noreferrer"><FaBehance /></a>
-        <a href="https://linkedin.com" target="_blank" rel="noreferrer"><FaLinkedin /></a>
-        <a href="https://instagram.https://www.instagram.com/mobilerast/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noreferrer"><FaInstagram /></a>
+        <a href="https://www.youtube.com/channel/UC9zhWu89h4AqolHrVspLkVw" target="_blank" rel="noreferrer"><FaYoutube /></a>
+        <a href="https://www.behance.net/rastmobile?locale=tr_TR" target="_blank" rel="noreferrer"><FaBehance /></a>
+        <a href="https://www.linkedin.com/company/rastmobile/posts/?feedView=all" target="_blank" rel="noreferrer"><FaLinkedin /></a>
+        <a href="https://www.instagram.com/mobilerast/" target="_blank" rel="noreferrer"><FaInstagram /></a>
       </div>
     </nav>
   );
