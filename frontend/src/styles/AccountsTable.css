@@ -161,7 +161,7 @@ td a:hover {
 /* Pagination */
 .pagination {
   position: sticky;   /* sayfanın scroll edilen kısmına göre sabit */
-  bottom: 0;        
+  bottom: 20px;        
   display: flex;
   justify-content: space-between;
   align-items: center;
