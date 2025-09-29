@@ -10,27 +10,25 @@ const AccountsTable = () => {
   const [loading, setLoading] = useState(true); 
   const [showModal, setShowModal] = useState(false); 
   const [selectedAccount, setSelectedAccount] = useState(null); 
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [search, setSearch] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [showDetailModal, setShowDetailModal] = useState(false); 
+  const [search, setSearch] = useState(""); 
+  const [rowsPerPage, setRowsPerPage] = useState(4); 
   const [currentPage, setCurrentPage] = useState(1); 
-  const [sortBy, setSortBy] = useState(null); 
-  const [order, setOrder] = useState("asc"); 
-  const [showSortOptions, setShowSortOptions] = useState(false); 
-  
+  const [sortBy, setSortBy] = useState(null);
+  const [order, setOrder] = useState("asc");
+  const [showSortOptions, setShowSortOptions] = useState(false);
+
   // Component mount edildiğinde hesapları çek
   useEffect(() => { fetchAccounts(); }, []);
 
-  // Hesapları backend'den çekme fonksiyonu
+  // Backend'den hesapları çekme fonksiyonu
   const fetchAccounts = async () => {
     setLoading(true);
     try {
       const data = await getAccounts();
       setAccounts(data);
-      return data;
     } catch (err) {
       console.error(err);
-      return [];
     } finally {
       setLoading(false);
     }
@@ -40,6 +38,7 @@ const AccountsTable = () => {
   const handleEdit = (acc) => {
     setSelectedAccount(acc);
     setShowModal(true);
+    setShowDetailModal(false); // Detay modalı kapat
   };
 
   // Hesap silme fonksiyonu
@@ -48,18 +47,17 @@ const AccountsTable = () => {
       try {
         await deleteAccount(id);
         fetchAccounts(); // Silindikten sonra listeyi güncelle
+        setShowDetailModal(false); // Detay modalı kapat
       } catch (err) { console.error(err); }
     }
   };
 
   // Hesapları sıralama fonksiyonu
   const handleSort = (column) => {
-    let newOrder = "asc";
-    if (sortBy === column) newOrder = order === "asc" ? "desc" : "asc";
+    const newOrder = sortBy === column ? (order === "asc" ? "desc" : "asc") : "asc";
     setSortBy(column);
     setOrder(newOrder);
 
-    // Sıralı hesapları state'e ata
     const sortedAccounts = [...accounts].sort((a, b) => {
       if (a[column] < b[column]) return newOrder === "asc" ? -1 : 1;
       if (a[column] > b[column]) return newOrder === "asc" ? 1 : -1;
@@ -68,16 +66,18 @@ const AccountsTable = () => {
     setAccounts(sortedAccounts);
   };
 
-  // Hesapları arama inputuna göre filtrele
+  // Arama inputuna göre hesapları filtreleme
   const filteredAccounts = accounts.filter(
-    (acc) =>
+    acc =>
       acc.name.toLowerCase().includes(search.toLowerCase()) ||
       acc.link.toLowerCase().includes(search.toLowerCase()) ||
       (acc.description && acc.description.toLowerCase().includes(search.toLowerCase()))
   );
 
-  // Toplam sayfa sayısı
+  // Sayfa sayısı ve paginasyon hesaplama
   const pageCount = Math.max(1, Math.ceil(filteredAccounts.length / rowsPerPage));
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const paginatedAccounts = filteredAccounts.slice(startIndex, startIndex + rowsPerPage);
 
   // Sayfa değişikliklerinde currentPage kontrolü
   useEffect(() => {
@@ -85,27 +85,17 @@ const AccountsTable = () => {
     if (filteredAccounts.length === 0) setCurrentPage(1);
   }, [filteredAccounts.length, rowsPerPage, pageCount, currentPage]);
 
-  // Sayfalama için başlangıç ve bitiş indexleri
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const paginatedAccounts = filteredAccounts.slice(startIndex, startIndex + rowsPerPage);
-
   // Sayfa geçiş fonksiyonları
   const goToPage = (p) => setCurrentPage(p);
   const prevPage = () => setCurrentPage((p) => Math.max(1, p - 1));
   const nextPage = () => setCurrentPage((p) => Math.min(pageCount, p + 1));
 
-  // Detay modalını aç
-  const openDetailModal = (acc) => {
-    setSelectedAccount(acc);
-    setShowDetailModal(true);
-  };
-
-  // Yükleniyorsa göster
+  // Yükleniyorsa göster 
   if (loading) return <p>Yükleniyor...</p>;
 
   return (
     <div className="accounts-container">
-      {/* Top bar: arama, filtre ve yeni hesap ekleme */}
+      {/* Top bar: Arama, filtre ve yeni hesap ekleme */}
       <div className="top-bar">
         <div className="left-controls">
           {/* Arama çubuğu */}
@@ -114,26 +104,16 @@ const AccountsTable = () => {
               type="text"
               placeholder="Search objects..."
               value={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1); // Arama yapıldığında sayfa 1'e dönsün
-              }}
+              onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
             />
-            <button className="search-btn">
-              <FaSearch />
-            </button>
+            <button className="search-btn"><FaSearch /></button>
           </div>
 
-          {/* Filtre ve sıralama */}
+          {/* Filtre ve sıralama butonu */}
           <div className="filter-container">
-            <button
-              className="filter-btn"
-              onClick={() => setShowSortOptions((prev) => !prev)}
-              title="Filtrele"
-            >
+            <button className="filter-btn" onClick={() => setShowSortOptions(prev => !prev)} title="Filtrele">
               <FaFilter />
             </button>
-
             {showSortOptions && (
               <div className="sort-dropdown">
                 <button onClick={() => handleSort("name")}>Name {order === "asc" ? "↑" : "↓"}</button>
@@ -144,10 +124,7 @@ const AccountsTable = () => {
         </div>
 
         {/* Yeni hesap ekleme butonu */}
-        <button
-          className="add-btn"
-          onClick={() => { setSelectedAccount(null); setShowModal(true); }}
-        >
+        <button className="add-btn" onClick={() => { setSelectedAccount(null); setShowModal(true); }}>
           + Yeni Hesap Ekle
         </button>
       </div>
@@ -161,37 +138,35 @@ const AccountsTable = () => {
         />
       )}
 
-      {/* Hesap detay modalı */}
+      {/* Hesap detay modalı*/}
       {showDetailModal && selectedAccount && (
         <div className="detail-modal">
           <button className="close-btn" onClick={() => setShowDetailModal(false)}>×</button>
           <h3>Hesap Detayları</h3>
-
           <div className="detail-box">
             <p><strong>Link:</strong> <a href={selectedAccount.link} target="_blank" rel="noreferrer">{selectedAccount.link}</a></p>
             <p><strong>Adı:</strong> {selectedAccount.name}</p>
             <p><strong>Açıklama:</strong> {selectedAccount.description}</p>
           </div>
-
           <div className="modal-footer">
+            {/* Düzenle butonu - renklendirme burada yapılmış */}
             <button
               className="action-btn edit-btn"
-              onClick={() => { handleEdit(selectedAccount); setShowDetailModal(false); }}
+              onClick={() => handleEdit(selectedAccount)}
               style={{ backgroundColor: "#7b2ff7", color: "#fff" }}
             >
-              <FaEdit color="#fff" /> Düzenle
+              <FaEdit /> Düzenle
             </button>
-            <button
-              className="action-btn delete-btn"
-              onClick={() => { handleDelete(selectedAccount.id); setShowDetailModal(false); }}
-            >
+
+            {/* Sil butonu */}
+            <button className="action-btn delete-btn" onClick={() => handleDelete(selectedAccount.id)}>
               <FaTrash /> Sil
             </button>
           </div>
         </div>
       )}
 
-      {/* Tablo */}
+      {/* Hesap tablosu */}
       <div className="table-wrapper">
         <table>
           <thead>
@@ -199,45 +174,25 @@ const AccountsTable = () => {
               <th onClick={() => handleSort("link")} className="link-col">
                 <div className="th-content">
                   <span>Sosyal Medya Linki</span>
-                  <span className="sort-arrow">
-                    {sortBy === "link" ? (order === "asc" ? "↑" : "↓") : "↕"}
-                  </span>
+                  <span className="sort-arrow">{sortBy === "link" ? (order === "asc" ? "↑" : "↓") : "↕"}</span>
                 </div>
               </th>
               <th onClick={() => handleSort("name")} className="name-col">
                 <div className="th-content">
                   <span>Sosyal Medya Adı</span>
-                  <span className="sort-arrow">
-                    {sortBy === "name" ? (order === "asc" ? "↑" : "↓") : "↕"}
-                  </span>
+                  <span className="sort-arrow">{sortBy === "name" ? (order === "asc" ? "↑" : "↓") : "↕"}</span>
                 </div>
               </th>
               <th className="desc-col">Açıklama</th>
             </tr>
           </thead>
-
           <tbody>
             {paginatedAccounts.length === 0 ? (
-              <tr>
-                <td colSpan="3" style={{ textAlign: "center", padding: "24px" }}>
-                  Hiç kayıt bulunamadı.
-                </td>
-              </tr>
+              <tr><td colSpan="3" style={{ textAlign: "center", padding: "24px" }}>Hiç kayıt bulunamadı.</td></tr>
             ) : (
-              paginatedAccounts.map((acc) => (
-                <tr
-                  key={acc.id}
-                  onClick={() => {
-                    setSelectedAccount(acc);
-                    setShowDetailModal(true);
-                  }}
-                  style={{ cursor: "pointer" }}
-                >
-                  <td className="link-col">
-                    <a href={acc.link} target="_blank" rel="noreferrer">
-                      {acc.link}
-                    </a>
-                  </td>
+              paginatedAccounts.map(acc => (
+                <tr key={acc.id} onClick={() => { setSelectedAccount(acc); setShowDetailModal(true); }} style={{ cursor: "pointer" }}>
+                  <td className="link-col"><a href={acc.link} target="_blank" rel="noreferrer">{acc.link}</a></td>
                   <td className="name-col">{acc.name}</td>
                   <td className="desc-col">{acc.description}</td>
                 </tr>
@@ -247,33 +202,22 @@ const AccountsTable = () => {
         </table>
       </div>
 
-      {/* Pagination */}
+      {/* Sayfalama */}
       <div className="pagination">
-        {/* Sayfa başına gösterim */}
         <div className="rows-per-page">
           <span>Show:</span>
-          <select
-            value={rowsPerPage}
-            onChange={(e) => { setRowsPerPage(parseInt(e.target.value, 10)); setCurrentPage(1); }}
-          >
+          <select value={rowsPerPage} onChange={(e) => { setRowsPerPage(parseInt(e.target.value,10)); setCurrentPage(1); }}>
             <option value={4}>4 rows</option>
             <option value={8}>8 rows</option>
             <option value={12}>12 rows</option>
           </select>
         </div>
-
-        {/* Sayfa kontrol butonları */}
         <div className="page-controls">
           <button className="page-btn" onClick={prevPage} disabled={currentPage === 1}>«</button>
-          {Array.from({ length: pageCount }).map((_, idx) => {
-            const pageNum = idx + 1;
-            return (
-              <button key={pageNum} className={`page-btn ${currentPage === pageNum ? "active" : ""}`} onClick={() => goToPage(pageNum)}>
-                {pageNum}
-              </button>
-            );
-          })}
-          <button className="page-btn" onClick={nextPage} disabled={currentPage === pageCount}>»</button>
+          {Array.from({ length: pageCount }).map((_, idx) => (
+            <button key={idx+1} className={`page-btn ${currentPage===idx+1?"active":""}`} onClick={() => goToPage(idx+1)}>{idx+1}</button>
+          ))}
+          <button className="page-btn" onClick={nextPage} disabled={currentPage===pageCount}>»</button>
         </div>
       </div>
     </div>

@@ -232,11 +232,6 @@ td a:hover {
   gap: 8px; /* Search ve filter arası boşluk */
 }
 
-.search-bar {
-  flex: 1;
-  max-width: 320px;
-}
-
 .filter-btn {
   background: #7b2ff7;
   color: #fff;
